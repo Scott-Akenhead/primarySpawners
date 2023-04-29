@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.253">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Scott A.Akenhead">
+<meta name="dcterms.date" content="2022-11-12">
+
+<title>Osoyoos Spawner Abundance</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="OSO SOX spawners_files/libs/clipboard/clipboard.min.js"></script>
+<script src="OSO SOX spawners_files/libs/quarto-html/quarto.js"></script>
+<script src="OSO SOX spawners_files/libs/quarto-html/popper.min.js"></script>
+<script src="OSO SOX spawners_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="OSO SOX spawners_files/libs/quarto-html/anchor.min.js"></script>
+<link href="OSO SOX spawners_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="OSO SOX spawners_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="OSO SOX spawners_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="OSO SOX spawners_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="OSO SOX spawners_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Osoyoos Spawner Abundance</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Scott A.Akenhead </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 12, 2022</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Simple <span class="ot">&lt;-</span> <span class="cf">function</span>(d, <span class="at">do.print=</span>T){ </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    Simp<span class="ot">=</span><span class="cf">function</span>(x){</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        x1<span class="ot">=</span>x[<span class="sc">!</span><span class="fu">is.na</span>(x)]</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        n <span class="ot">&lt;-</span> <span class="fu">length</span>(x1); m <span class="ot">&lt;-</span> <span class="fu">mean</span>(x1); sd <span class="ot">&lt;-</span> <span class="fu">sd</span>(x1); se <span class="ot">=</span> sd<span class="sc">/</span><span class="fu">sqrt</span>(n); cv<span class="ot">=</span> sd<span class="sc">/</span>m; </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        y<span class="ot">=</span> <span class="fu">quantile</span>(x1)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>         ma<span class="ot">=</span><span class="fu">mad</span>(x1);</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        a<span class="ot">=</span><span class="fu">c</span>( <span class="fu">prettyNum</span>(<span class="at">format=</span><span class="st">"fg"</span>,  n, <span class="at">digits=</span><span class="dv">1</span>), </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>             <span class="fu">prettyNum</span>(<span class="at">format=</span><span class="st">"fg"</span>,  m, <span class="at">digits=</span><span class="dv">3</span>), </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>             <span class="fu">prettyNum</span>(<span class="at">format=</span><span class="st">"fg"</span>, sd, <span class="at">digits=</span><span class="dv">3</span>), </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>             <span class="fu">prettyNum</span>(<span class="at">format=</span><span class="st">"fg"</span>, se, <span class="at">digits=</span><span class="dv">3</span>), </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>             <span class="fu">prettyNum</span>(<span class="at">format=</span><span class="st">"fg"</span>, cv, <span class="at">digits=</span><span class="dv">3</span>),</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>             <span class="fu">prettyNum</span>(<span class="at">format=</span><span class="st">"fg"</span>, y[<span class="dv">3</span>],<span class="at">digits=</span><span class="dv">3</span>), </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>             <span class="fu">prettyNum</span>(<span class="at">format=</span><span class="st">"fg"</span>, ma,  <span class="at">digits=</span><span class="dv">3</span>), </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>             <span class="fu">prettyNum</span>(<span class="at">format=</span><span class="st">"fg"</span>, y[<span class="dv">1</span>],<span class="at">digits=</span><span class="dv">3</span>),</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>             <span class="fu">prettyNum</span>(<span class="at">format=</span><span class="st">"fg"</span>, y[<span class="dv">2</span>],<span class="at">digits=</span><span class="dv">3</span>), </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>             <span class="fu">prettyNum</span>(<span class="at">format=</span><span class="st">"fg"</span>, y[<span class="dv">4</span>],<span class="at">digits=</span><span class="dv">3</span>),</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>             <span class="fu">prettyNum</span>(<span class="at">format=</span><span class="st">"fg"</span>, y[<span class="dv">5</span>],<span class="at">digits=</span><span class="dv">3</span>))</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>             <span class="fu">return</span>(a)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    sts<span class="ot">=</span><span class="fu">c</span>(<span class="st">"n"</span>,<span class="st">"m"</span>,<span class="st">"s"</span>,<span class="st">"se"</span>,<span class="st">"cv"</span>,<span class="st">"md"</span>, <span class="st">"mad"</span>, <span class="st">"min"</span>, <span class="st">"q1"</span>,<span class="st">"q3"</span>,<span class="st">"max"</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">is.null</span>(<span class="fu">dim</span>(d))) {  <span class="co"># is d one-dimensional?</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        z<span class="ot">=</span><span class="fu">noquote</span>(<span class="fu">Simp</span>(d)) <span class="co"># returns a character string suitable for printing</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>        <span class="fu">names</span>(z) <span class="ot">=</span> sts</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span>(do.print) <span class="fu">print</span>(z)   </span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        <span class="fu">invisible</span>(<span class="fu">as.numeric</span>(z))</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> { </span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        z<span class="ot">=</span><span class="fu">noquote</span>(<span class="fu">apply</span>(d, <span class="dv">2</span>, Simp))</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>        <span class="fu">rownames</span>(z)<span class="ot">=</span>sts </span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span>(do.print) <span class="fu">print</span>(z)   </span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        z<span class="ot">=</span><span class="fu">matrix</span>(<span class="fu">as.numeric</span>(z),<span class="at">ncol=</span><span class="fu">dim</span>(d)[<span class="dv">2</span>])</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>        <span class="fu">dimnames</span>(z)<span class="ot">=</span><span class="fu">list</span>(<span class="at">stats=</span>sts, <span class="at">vars=</span><span class="fu">colnames</span>(d))</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>        <span class="fu">invisible</span>(z)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="source" class="level2">
+<h2 class="anchored" data-anchor-id="source">Source</h2>
+<p>Mathieu, C, D. Machin, K. Hyatt, T. White, S. Reimer, E. Hegerat, C. Louie, K. Alex. 2020. <strong>Okanagan Fish and Water Management Tools (FWMT) year 2020-2021.</strong> Prepared for the FWMT Steering Committee and Douglas County PUD. Prepared by Okanagan Nation Alliance Fisheries Department, Westbank, BC.</p>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<p>PLD cannot exceed AUC, given these approximate height and integral of a Gaussian distribution. Thus 2019 values are assumed reversed.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Year</th>
+<th style="text-align: right;">Wells</th>
+<th style="text-align: right;">PeakLiveDead</th>
+<th style="text-align: right;">AreaUnderCurve</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">20</td>
+<td style="text-align: right;">2001</td>
+<td style="text-align: right;">74486</td>
+<td style="text-align: right;">26996</td>
+<td style="text-align: right;">41922</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">19</td>
+<td style="text-align: right;">2002</td>
+<td style="text-align: right;">10659</td>
+<td style="text-align: right;">2789</td>
+<td style="text-align: right;">4898</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">18</td>
+<td style="text-align: right;">2003</td>
+<td style="text-align: right;">29374</td>
+<td style="text-align: right;">10390</td>
+<td style="text-align: right;">17753</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">17</td>
+<td style="text-align: right;">2004</td>
+<td style="text-align: right;">78053</td>
+<td style="text-align: right;">21308</td>
+<td style="text-align: right;">41571</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">16</td>
+<td style="text-align: right;">2005</td>
+<td style="text-align: right;">55559</td>
+<td style="text-align: right;">24161</td>
+<td style="text-align: right;">31536</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">15</td>
+<td style="text-align: right;">2006</td>
+<td style="text-align: right;">22075</td>
+<td style="text-align: right;">18086</td>
+<td style="text-align: right;">20819</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">14</td>
+<td style="text-align: right;">2007</td>
+<td style="text-align: right;">22273</td>
+<td style="text-align: right;">8283</td>
+<td style="text-align: right;">13504</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">13</td>
+<td style="text-align: right;">2008</td>
+<td style="text-align: right;">165334</td>
+<td style="text-align: right;">72598</td>
+<td style="text-align: right;">127602</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">12</td>
+<td style="text-align: right;">2009</td>
+<td style="text-align: right;">134937</td>
+<td style="text-align: right;">44328</td>
+<td style="text-align: right;">64141</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">11</td>
+<td style="text-align: right;">2010</td>
+<td style="text-align: right;">291764</td>
+<td style="text-align: right;">96885</td>
+<td style="text-align: right;">209974</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">10</td>
+<td style="text-align: right;">2011</td>
+<td style="text-align: right;">111507</td>
+<td style="text-align: right;">24228</td>
+<td style="text-align: right;">77650</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">9</td>
+<td style="text-align: right;">2012</td>
+<td style="text-align: right;">326102</td>
+<td style="text-align: right;">49831</td>
+<td style="text-align: right;">94071</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">8</td>
+<td style="text-align: right;">2013</td>
+<td style="text-align: right;">129993</td>
+<td style="text-align: right;">23341</td>
+<td style="text-align: right;">36557</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">7</td>
+<td style="text-align: right;">2014</td>
+<td style="text-align: right;">490802</td>
+<td style="text-align: right;">83446</td>
+<td style="text-align: right;">146701</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">2015</td>
+<td style="text-align: right;">186964</td>
+<td style="text-align: right;">6374</td>
+<td style="text-align: right;">10443</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">5</td>
+<td style="text-align: right;">2016</td>
+<td style="text-align: right;">216031</td>
+<td style="text-align: right;">43277</td>
+<td style="text-align: right;">55190</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">2017</td>
+<td style="text-align: right;">42299</td>
+<td style="text-align: right;">4795</td>
+<td style="text-align: right;">10040</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">153637</td>
+<td style="text-align: right;">17737</td>
+<td style="text-align: right;">31001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">49862</td>
+<td style="text-align: right;">6926</td>
+<td style="text-align: right;">13108</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">226107</td>
+<td style="text-align: right;">28079</td>
+<td style="text-align: right;">48138</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="basic-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="basic-statistics">Basic Statistics</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Simple</span>(escapement) <span class="co"># default: print=TRUE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Year    Wells  PeakLiveDead AreaUnderCurve
+n   20      20     20           20            
+m   2010    140891 30693        54831         
+s   5.92    123019 26877        53427         
+se  1.32    27508  6010         11947         
+cv  0.00294 0.873  0.876        0.974         
+md  2010    120750 23751        39064         
+mad 7.41    110705 23939        37537         
+min 2001    10659  2789         4898          
+q1  2006    47971  9863         16691         
+q3  2015    194231 43540        67518         
+max 2020    490802 96885        209974        </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> escapement[ ,<span class="dv">3</span>]<span class="sc">/</span>escapement[ ,<span class="dv">4</span>]</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">'</span><span class="sc">\n</span><span class="st"> ratio, PLD to AUC: </span><span class="sc">\n</span><span class="st">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ ratio, PLD to AUC: </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Simple</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     n      m      s     se     cv     md    mad    min     q1     q3    max 
+    20  0.594  0.122 0.0273  0.206  0.578 0.0816  0.312  0.529   0.64  0.869 </code></pre>
+</div>
+</div>
+<p>note the mean of PLD/AUC = 0.59 is too large, only possible if stdev of spawner abundance is &lt; 1 day (note dnorm(0,0,1) = 0.4;dnorm(0,0,0.67) = 0.59). In fact that stdev is ~5 days. The discrepancy might be AUC is live only.</p>
+<p>Also note AUC / Wells for 2015 is an outlier: 0.056 (94.4% loss) in comparison to mean excluding 2015, 0.47 (.21); 1.9 stdev below mean, one in 35 years.</p>
+</section>
+<section id="plot-auc-against-wells." class="level2">
+<h2 class="anchored" data-anchor-id="plot-auc-against-wells.">plot AUC against Wells.</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(escapement, {</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    x<span class="ot">=</span><span class="fl">1e-6</span><span class="sc">*</span>Wells;</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    y<span class="ot">=</span><span class="fl">1e-6</span><span class="sc">*</span>AreaUnderCurve;</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">par</span>(<span class="at">tcl=</span><span class="fl">0.2</span>,<span class="at">mgp=</span><span class="fu">c</span>(<span class="fl">1.25</span>,.<span class="dv">25</span>,<span class="dv">0</span>));   <span class="co"># tics inside, axis labels close</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(y<span class="sc">~</span>x, <span class="at">pch=</span><span class="dv">20</span>, <span class="at">cex=</span>.<span class="dv">6</span>, <span class="at">xlab=</span><span class="st">"Wells (millions)"</span>, <span class="at">ylab=</span><span class="st">'AUC (millions)'</span>);</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>);</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">209974</span><span class="sc">/</span><span class="dv">291764</span>, <span class="at">lty=</span><span class="st">"dashed"</span>, <span class="at">col=</span><span class="st">"blue"</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="OSO-SOX-spawners_files/figure-html/plt_esc-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#     xlim= c(0, max(Wells)), ylim=c(0,max(AreaUnderCurve)) )</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Note typically good survival is about 0.72 (dashed line) as typified by 2010. Modal survival is approximately 0.3, typified by 2014.</p>
+</section>
+<section id="plot-pld-vs-auc" class="level2">
+<h2 class="anchored" data-anchor-id="plot-pld-vs-auc">plot PLD vs AUC</h2>
+<p><em>peak live plus dead</em> at Oliver against <em>area under curve</em> (AUC) of spawners observed.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">lm</span>(PeakLiveDead<span class="sc">~</span><span class="dv">0</span> <span class="sc">+</span> AreaUnderCurve, <span class="at">data=</span>escapement)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(escapement, {</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    y<span class="ot">=</span><span class="fl">1e-6</span><span class="sc">*</span>PeakLiveDead;</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    x<span class="ot">=</span><span class="fl">1e-6</span><span class="sc">*</span>AreaUnderCurve;</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">par</span>(<span class="at">tcl=</span><span class="fl">0.2</span>,<span class="at">mgp=</span><span class="fu">c</span>(<span class="fl">1.25</span>,.<span class="dv">25</span>,<span class="dv">0</span>));   <span class="co"># tics inside, axis labels close</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(y<span class="sc">~</span>x, <span class="at">pch=</span><span class="dv">20</span>, <span class="at">cex=</span>.<span class="dv">6</span>,  </span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">xlab=</span><span class="st">'AUC (millions)'</span>,<span class="at">ylab=</span><span class="st">"Peak Live + Dead (millions)"</span>);</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># abline(0,1);</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">abline</span>(a, <span class="at">lty=</span><span class="st">'dashed'</span>, <span class="at">col=</span><span class="st">"blue"</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="OSO-SOX-spawners_files/figure-html/plt_auc_pld-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#     xlim= c(0, max(Wells)), ylim=c(0,max(AreaUnderCurve)) )</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The low outlier is 2011, PLD/AUC is 0.31 compared to regression through origin slope of 0.526 (sd=0.022) indicated by blue dashed line.</p>
+</section>
+<section id="principle-components" class="level2">
+<h2 class="anchored" data-anchor-id="principle-components">principle components</h2>
+<p>Assuming that PLD and AUC estimate the same abundance of spawners, with comparable accuracy each year, these indices can be combined as their principle component. This will tend to reduce the effects an error or outlier in either.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>pc <span class="ot">&lt;-</span><span class="fu">princomp</span>(<span class="sc">~</span>PeakLiveDead <span class="sc">+</span> AreaUnderCurve, <span class="at">data=</span>escapement, <span class="at">cor=</span><span class="cn">TRUE</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Importance of components:
+                          Comp.1     Comp.2
+Standard deviation     1.4029501 0.17813237
+Proportion of Variance 0.9841344 0.01586557
+Cumulative Proportion  0.9841344 1.00000000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>spawnersPC <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">Year=</span>escapement<span class="sc">$</span>Year, <span class="at">PC1 =</span>pc<span class="sc">$</span>scores[,<span class="dv">1</span>],<span class="at">PC2 =</span>pc<span class="sc">$</span>scores[,<span class="dv">2</span>])</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">file.exists</span>(<span class="st">"spawnersPC.Rdata"</span>)) {</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">saveRDS</span>(spawnersPC, <span class="at">file=</span><span class="st">"spawnersPC.Rdata"</span> )</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>}    </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(spawnersPC, <span class="at">row.names =</span> <span class="cn">FALSE</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: right;">Year</th>
+<th style="text-align: right;">PC1</th>
+<th style="text-align: right;">PC2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">2001</td>
+<td style="text-align: right;">-0.2750784</td>
+<td style="text-align: right;">0.0754992</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2002</td>
+<td style="text-align: right;">-1.4312364</td>
+<td style="text-align: right;">-0.0751716</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2003</td>
+<td style="text-align: right;">-1.0515080</td>
+<td style="text-align: right;">-0.0445557</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2004</td>
+<td style="text-align: right;">-0.4333796</td>
+<td style="text-align: right;">-0.0732696</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2005</td>
+<td style="text-align: right;">-0.4926330</td>
+<td style="text-align: right;">0.1400046</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2006</td>
+<td style="text-align: right;">-0.8021388</td>
+<td style="text-align: right;">0.1215480</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2007</td>
+<td style="text-align: right;">-1.1660784</td>
+<td style="text-align: right;">-0.0437329</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2008</td>
+<td style="text-align: right;">2.1192831</td>
+<td style="text-align: right;">0.1429877</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2009</td>
+<td style="text-align: right;">0.4944692</td>
+<td style="text-align: right;">0.2416295</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2010</td>
+<td style="text-align: right;">3.8933744</td>
+<td style="text-align: right;">-0.3199561</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2011</td>
+<td style="text-align: right;">0.1353510</td>
+<td style="text-align: right;">-0.4843623</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2012</td>
+<td style="text-align: right;">1.0494257</td>
+<td style="text-align: right;">-0.0162444</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2013</td>
+<td style="text-align: right;">-0.4465876</td>
+<td style="text-align: right;">0.0496911</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2014</td>
+<td style="text-align: right;">2.6714434</td>
+<td style="text-align: right;">0.1764629</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2015</td>
+<td style="text-align: right;">-1.2591725</td>
+<td style="text-align: right;">-0.0536972</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2016</td>
+<td style="text-align: right;">0.3445554</td>
+<td style="text-align: right;">0.3348044</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2017</td>
+<td style="text-align: right;">-1.3072664</td>
+<td style="text-align: right;">-0.0908466</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">-0.6732993</td>
+<td style="text-align: right;">-0.0261324</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">-1.2080848</td>
+<td style="text-align: right;">-0.0749849</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">-0.1614391</td>
+<td style="text-align: right;">0.0203262</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The resulting PC1 is equivalent to r^2 = 98.4%.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>lim<span class="ot">=</span><span class="fu">range</span>(pc<span class="sc">$</span>scores)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">tcl=</span><span class="fl">0.2</span>,<span class="at">mgp=</span><span class="fu">c</span>(<span class="fl">1.25</span>,.<span class="dv">25</span>,<span class="dv">0</span>));   <span class="co"># tics inside, axis labels close</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pc<span class="sc">$</span>scores, <span class="at">xlim=</span>lim, <span class="at">ylim=</span>lim, <span class="at">pch=</span><span class="dv">20</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>,<span class="at">v=</span><span class="dv">0</span>, <span class="at">col=</span><span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="OSO-SOX-spawners_files/figure-html/plt_pc-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#biplot(pc)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This is a calibration instead of regression (prediction). The major assumption is that observations variance is similar for both variables.</p>
+<p>The plot of PC2 <em>vs</em> PC1 emphasizes how rows 10 and 11 (years 2011 and 2012) deviate from pattern of remaining points (the residuals are <em>PC2</em>).</p>
+</section>
+<section id="recalibrate-pc1-to-scale-of-auc" class="level2">
+<h2 class="anchored" data-anchor-id="recalibrate-pc1-to-scale-of-auc">Recalibrate PC1 to scale of AUC</h2>
+<p>PC1 has mean mean 0 and stdev 1.44, with range -1.43 to 3.89. To eliminate negative spawners, this is adjusted to the mean 54,522 and stdev 53,698 of AUC 2001-2020 (range: 4,898 to 209,974). This is the value used for spawner abundance (without attention to fecundity via length frequencies and sex ratios) in subsequent analyses.</p>
+<p>Saved as file <em>‘data/OSO_spawners_PC.RData’</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> (spawnersPC[,<span class="dv">2</span>] <span class="sc">*</span> <span class="dv">53698</span><span class="sc">/</span><span class="fu">sd</span>(spawnersPC[,<span class="dv">2</span>])) <span class="sc">+</span> <span class="dv">54522</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Simple</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    n     m     s    se    cv    md   mad   min    q1    q3   max 
+   20 54522 53698 12007 0.985 38108 41322  1128 14226 68774 2e+05 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>spawners <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">Year=</span>spawnersPC<span class="sc">$</span>Year, <span class="at">spawners=</span><span class="fu">round</span>(a,<span class="dv">0</span>)) </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">file.exists</span>(<span class="st">'data/OSO_spawners_PC.RData'</span>)){ <span class="co"># does not exist</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">saveRDS</span>(spawners, <span class="at">file =</span> <span class="st">'data/OSO_spawners_PC.RData'</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>}    </span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(spawners)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: right;">Year</th>
+<th style="text-align: right;">spawners</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">2001</td>
+<td style="text-align: right;">44260</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2002</td>
+<td style="text-align: right;">1128</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2003</td>
+<td style="text-align: right;">15295</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2004</td>
+<td style="text-align: right;">38354</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2005</td>
+<td style="text-align: right;">36144</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2006</td>
+<td style="text-align: right;">24597</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2007</td>
+<td style="text-align: right;">11020</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2008</td>
+<td style="text-align: right;">133584</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2009</td>
+<td style="text-align: right;">72969</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2010</td>
+<td style="text-align: right;">199768</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2011</td>
+<td style="text-align: right;">59571</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2012</td>
+<td style="text-align: right;">93672</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2013</td>
+<td style="text-align: right;">37862</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2014</td>
+<td style="text-align: right;">154183</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2015</td>
+<td style="text-align: right;">7547</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2016</td>
+<td style="text-align: right;">67376</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2017</td>
+<td style="text-align: right;">5753</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">29404</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">9453</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">48499</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,192 @@
+---
+title: "Osoyoos Spawner Abundance"
+author: "Scott A.Akenhead"
+date: last-modified
+date-format: iso
+format:
+  pdf:
+    toc: true
+
+---
+
+## Summary
+Data for Osoyoos Lake spawner abundance 2001 to 2020 is available as Peak Life plus Dead (PLD) and as Area Under the Curve (AUC). One data point is corrected. Simple statistics and plots are exampled. Low survival from Wells dam to spawning grounds (Osoyoos River above Osoyoos Lake, near Oliver BC) in 2015 is noted. PLD and AUC are tightly correlated, as expected because these are, ostensibly, height and integral of distribution of spawner abundance by time. These indices are combined as the first principle component (r^2 = 98.4%), which is then scaled and located to correspond to AUC statistics (mean, stdev). The result is saved for subsequent analyses such as spawner to parr survival. 
+
+## Source
+Mathieu, C, D. Machin, K. Hyatt, T. White, S. Reimer, E. Hegerat, C. Louie, K. Alex. 2020. **Okanagan Fish and Water Management Tools (FWMT) year 2020-2021.** Prepared for the FWMT Steering Committee and Douglas County PUD. Prepared by
+Okanagan Nation Alliance Fisheries Department, Westbank, BC.
+
+```{r}
+#| label: setup
+knitr::opts_chunk$set(echo=TRUE)
+library(magrittr); library(knitr);
+```
+
+```{r}
+#| label: local_functions
+#| include: false
+Simple <- function(d, do.print=T){ 
+	Simp=function(x){
+		x1=x[!is.na(x)]
+		n <- length(x1); m <- mean(x1); sd <- sd(x1); se = sd/sqrt(n); cv= sd/m; 
+		y= quantile(x1)
+		 ma=mad(x1);
+		a=c( prettyNum(format="fg",  n, digits=1), 
+		     prettyNum(format="fg",  m, digits=3), 
+		     prettyNum(format="fg", sd, digits=3), 
+		     prettyNum(format="fg", se, digits=3), 
+		     prettyNum(format="fg", cv, digits=3),
+		     prettyNum(format="fg", y[3],digits=3), 
+		     prettyNum(format="fg", ma,  digits=3), 
+		     prettyNum(format="fg", y[1],digits=3),
+		     prettyNum(format="fg", y[2],digits=3), 
+		     prettyNum(format="fg", y[4],digits=3),
+		     prettyNum(format="fg", y[5],digits=3))
+		     return(a)
+		}
+	sts=c("n","m","s","se","cv","md", "mad", "min", "q1","q3","max")
+	if(is.null(dim(d))) {  # is d one-dimensional?
+		z=noquote(Simp(d)) # returns a character string suitable for printing
+		names(z) = sts
+		if(do.print) print(z)	
+		invisible(as.numeric(z))
+	} else { 
+		z=noquote(apply(d, 2, Simp))
+		rownames(z)=sts 
+		if(do.print) print(z)	
+		z=matrix(as.numeric(z),ncol=dim(d)[2])
+		dimnames(z)=list(stats=sts, vars=colnames(d))
+		invisible(z)
+	}
+}
+``` 
+
+## Data
+Copied from source above.  
+PLD cannot exceed AUC, given these approximate height and integral of a Gaussian distribution. Thus 2019 values are assumed reversed.
+
+```{r tab-esc, echo=FALSE}
+#Year Wells PLDriver AUCriver
+a<-scan(sep=',',text="2020,226107,28079,48138
+2019,49862,13108,6926
+2018,153637,17737,31001
+2017,42299,4795,10040
+2016,216031,43277,55190
+2015,186964,6374,10443
+2014,490802,83446,146701
+2013,129993,23341,36557
+2012,326102,49831,94071
+2011,111507,24228,77650
+2010,291764,96885,209974
+2009,134937,44328,64141
+2008,165334,72598,127602
+2007,22273,8283,13504
+2006,22075,18086,20819
+2005,55559,24161,31536
+2004,78053,21308,41571
+2003,29374,10390,17753
+2002,10659,2789,4898
+2001,74486,26996,41922" )
+escapement <- a %>% matrix(ncol=4, byrow=T) %>%  as.data.frame
+colnames(escapement) <- c('Year', 'Wells', 'PeakLiveDead', 'AreaUnderCurve')
+# swap PLD for AUC in year 2019
+j = escapement$Year == 2019  # which row
+escapement[j, 3:4] <- escapement[j, 4:3] # swap
+# sort year ascending
+escapement <- escapement[order(escapement$Year),]
+kable(escapement)
+```
+
+## Basic Statistics
+Using a local function by the author: Simple.
+
+```{r simple}
+Simple(escapement[,-1]) # default: print=TRUE
+a = escapement[ ,3]/escapement[ ,4]
+cat('\n ratio, PLD to AUC: \n')
+Simple(a)
+```
+note the mean of PLD/AUC = 0.59 is too large, only possible if stdev of spawner abundance is < 1 day (note dnorm(0,0,1) = 0.4;dnorm(0,0,0.67) = 0.59). In fact that stdev is ~5 days. The discrepancy might be AUC is live only.
+
+Also note AUC / Wells for 2015 is an outlier: 0.056 (94.4% loss) in comparison to mean excluding 2015, 0.47 (.21); 1.9 stdev below mean, one in 35 years. 
+
+## plot AUC against Wells. 
+
+```{r plt_esc}
+with(escapement, {
+    x=1e-6*Wells;
+    y=1e-6*AreaUnderCurve;
+    par(tcl=0.2,mgp=c(1.25,.25,0));   # tics inside, axis labels close
+    plot(y~x, pch=20, cex=.6, xlab="Wells (millions)", ylab='AUC (millions)');
+    abline(0,1);
+    abline(0, 209974/291764, lty="dashed", col="blue")
+})
+#     xlim= c(0, max(Wells)), ylim=c(0,max(AreaUnderCurve)) )
+```
+
+Note typically good survival is about `r round(209974/291764,2)` (dashed line) as typified by 2010. Modal survival is approximately 0.3, typified by 2014. 
+
+## plot PLD vs AUC
+
+_peak live plus dead_ at Oliver against _area under curve_ (AUC) of spawners observed.
+
+
+```{r plt_auc_pld}
+a <- lm(PeakLiveDead~0 + AreaUnderCurve, data=escapement)
+with(escapement, {
+    y=1e-6*PeakLiveDead;
+    x=1e-6*AreaUnderCurve;
+    par(tcl=0.2,mgp=c(1.25,.25,0));   # tics inside, axis labels close
+    plot(y~x, pch=20, cex=.6,  
+         xlab='AUC (millions)',ylab="Peak Live + Dead (millions)");
+    # abline(0,1);
+    abline(a, lty='dashed', col="blue")
+})
+#     xlim= c(0, max(Wells)), ylim=c(0,max(AreaUnderCurve)) )
+```
+
+The low outlier is 2011, PLD/AUC is `r round(24228/77650,2)` compared to regression through origin slope of  0.526 (sd=0.022) indicated by blue dashed line. 
+
+## principle components
+
+Assuming that PLD and AUC estimate the same abundance of spawners, with comparable accuracy each year, these indices can be combined as their principle component. This will tend to reduce the effects an error or outlier in either. 
+
+```{r calib}
+pc <-princomp(~PeakLiveDead + AreaUnderCurve, data=escapement, cor=TRUE)
+summary(pc)
+spawnersPC = data.frame(Year=escapement$Year, PC1 =pc$scores[,1],PC2 =pc$scores[,2])
+if(!file.exists("spawnersPC.Rdata")) {
+    saveRDS(spawnersPC, file="spawnersPC.Rdata" )
+}    
+kable(spawnersPC, row.names = FALSE )
+```
+The resulting PC1 is equivalent to r^2 = 98.4%. 
+
+```{r plt_pc}
+lim=range(pc$scores)
+par(tcl=0.2,mgp=c(1.25,.25,0));   # tics inside, axis labels close
+plot(pc$scores, xlim=lim, ylim=lim, pch=20)
+abline(h=0,v=0, col="blue")
+#biplot(pc)
+```
+
+This is a calibration instead of regression (prediction). The major assumption is that observations variance is similar for both variables. 
+
+The plot of PC2 _vs_ PC1 emphasizes how rows 10 and 11 (years 2011 and 2012) deviate from pattern of remaining points (the residuals are *PC2*).
+
+## Recalibrate PC1 to scale of AUC
+
+PC1 has mean mean 0 and stdev 1.44, with range -1.43 to 3.89. To eliminate negative spawners, this is adjusted to the mean 54,522 and stdev 53,698 of AUC 2001-2020 (range: 4,898 to 209,974). This is the value used for spawner abundance (without attention to fecundity via length frequencies and sex ratios) in subsequent analyses.
+
+Saved as file *'data/OSO_spawners_PC.RData'*.
+
+```{r}
+#| label: adjust
+a <- (spawnersPC[,2] * 53698/sd(spawnersPC[,2])) + 54522
+Simple(a)
+spawners = data.frame(Year=spawnersPC$Year, spawners=round(a,0)) 
+if(!file.exists('data/OSO_spawners_PC.RData')){ # does not exist
+    saveRDS(spawners, file = 'data/OSO_spawners_PC.RData')
+}    
+kable(spawners)
+```

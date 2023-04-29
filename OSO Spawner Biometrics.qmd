@@ -1,0 +1,116 @@
+---
+title: "OSO Spawner Biometrics"
+author: "Scott A. Akenhead, Braden Judson"
+date: " `r Sys.Date()` "
+format: pdf
+editor: visual
+execute: 
+  cache: true---
+---
+
+```{r setup}
+#| echo: false
+#| include: false
+options(show.signif.stars = F)
+library(knitr); library(ggplot2); library(magrittr)
+```
+
+```{r local}
+#| echo: false
+#| include: false
+# ggplot theme via Braden Judson github bioinformatics6020_assignment
+Custom_Theme <- theme_bw() + theme(panel.background = element_rect(fill =  "white", colour = "black", linetype = "solid"), panel.grid.minor = element_line(colour = "white"), plot.caption = element_text(hjust = 0, vjust = 1, size = 12))
+
+#------------------- SIMPLE STATISTICS  -------------
+#' @title Simple
+#' @author Scott Akenhead 250-210-4410 \email{scott@s4s.com}
+#' @description
+#' print and return eight simple statistics for vector, matrix, array, or dataframe.
+#' n is count that excludes NA), md is median, mn is minimum, mx is maximum.
+#' works by columns if input is a data.frame, matrix, or array.
+#' see also summary(), str(), quantiles()
+#' @usage Simple(x, do.print=T)
+#' @return
+#' prints summary statistics, typically formatted to 3 digit accuracy
+#' returns a vector or matrix at full precision
+#' @export
+#' @examples
+#' y2= rnorm(10,0,1); Simple(y2); 
+#' y2= matrix(rnorm(40,0,1), ncol=4, dimnames=list(NULL, c("eenie","meenie","mynie","mo"))); 
+#' Simple(y2); # ll rows 4 columns
+#' Simple(y2,do.print=F)[2,]; # a vector, the means
+#' Simple(y2,do.print=F)[c(2,4),,drop=F] # means and SEs in columns
+#' Simple(y2,do.print=F)[c(8,9,6,10,11),,drop=F] # extrema and quartiles
+#' rm(y2)
+#'
+Simple <- function(d, do.print=T){ 
+	Simp=function(x){
+		x1=x[!is.na(x)]
+		n <- length(x1); m <- mean(x1); sd <- sd(x1); se = sd/sqrt(n); cv= sd/m; 
+		y= quantile(x1)
+		 ma=mad(x1);
+		a=c( prettyNum(format="fg",  n, digits=1), 
+		     prettyNum(format="fg",  m, digits=3), 
+		     prettyNum(format="fg", sd, digits=3), 
+		     prettyNum(format="fg", se, digits=3), 
+		     prettyNum(format="fg", cv, digits=3),
+		     prettyNum(format="fg", y[3],digits=3), 
+		     prettyNum(format="fg", ma,  digits=3), 
+		     prettyNum(format="fg", y[1],digits=3),
+		     prettyNum(format="fg", y[2],digits=3), 
+		     prettyNum(format="fg", y[4],digits=3),
+		     prettyNum(format="fg", y[5],digits=3))
+		     return(a)
+		}
+	sts=c("n","m","s","se","cv","md", "mad", "min", "q1","q3","max")
+	if(is.null(dim(d))) {  # is d one-dimensional?
+		z=noquote(Simp(d)) # returns a character string suitable for printing
+		names(z) = sts
+		if(do.print) print(z)	
+		invisible(as.numeric(z))
+	} else { 
+		z=noquote(apply(d, 2, Simp))
+		rownames(z)=sts 
+		if(do.print) print(z)	
+		z=matrix(as.numeric(z),ncol=dim(d)[2])
+		dimnames(z)=list(stats=sts, vars=colnames(d))
+		invisible(z)
+	}
+}
+```
+
+## Read Data
+
+### Spawners
+
+```{r}
+spawners <- read.csv("../Braden Judson/data/OSO_SOX_spawner_data_tidy.csv") 
+noquote(colnames(spawners))
+cat(' number of observations:', dim(spawners)[1],'\n')
+
+```
+
+```{r}
+year_count <- by(spawners$fork_length_mm, spawners$year, length) %>% unclass
+kable(year_count)
+dat = data.frame(Count=year_count, Year=2000:2019)
+ggplot(data=dat,aes(Year,Count))  + Custom_Theme +
+       geom_col(aes(fill="wheat"), show.legend = FALSE) + 
+    labs(y="Count: Lengths")
+```
+
+## Mean Lengths
+
+```{r}
+#no.na = function(x) x[!is.na(x)]
+sts=c("n","m","s","se","cv","md", "mad", "min", "q1","q3","max")
+j= !is.na(spawners$fork_length_mm) # about half
+length_stats <- by(spawners$fork_length_mm[j], spawners$year[j],function(x) Simple(x, do.print=F)) %>% simplify2array %>% `row.names<-`(sts) %>% t
+length_stats  %<>% `[`(,c(1:3,8,9,6,10,11)) # drop se,cv. md between q1, q3
+kable(length_stats)  # drop se,cv. md between q1, q3
+years= length_stats %>% rownames %>% as.numeric  # nothing in 2021 
+dat = cbind(Year=years, length_stats) %>% as.data.frame
+ggplot(data=dat, aes(Year,md))  + Custom_Theme +
+        geom_errorbar(aes(ymin=q1, ymax=q3)) + geom_point() +
+    labs(y="Median Lengths", title="Osoyoos Sockeye Spawners", subtitle = "medians and quartiles")
+```
